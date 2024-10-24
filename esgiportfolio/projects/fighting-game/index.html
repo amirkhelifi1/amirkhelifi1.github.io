@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Street Combat - Jeu de Combat</title>
+    <link rel="stylesheet" href="src/styles/style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="hud">
+        <!-- Player 1 Health Bar -->
+        <div class="player-health">
+          <div class="player-health-bg"></div>
+          <div id="player1Health" class="health-bar"></div>
+        </div>
+
+        <!-- Timer -->
+        <div id="timer" class="timer">60</div>
+
+        <!-- Player 2 Health Bar -->
+        <div class="player-health">
+          <div class="player-health-bg"></div>
+          <div id="player2Health" class="health-bar"></div>
+        </div>
+      </div>
+
+      <canvas id="gameCanvas"></canvas>
+
+      <div class="controls-info">
+        <div class="player1-controls">
+          <h3>Joueur 1</h3>
+          <p>Z, Q, S, D - Déplacement</p>
+          <p>F - Attaque</p>
+          <p>G - Attaque spéciale</p>
+        </div>
+        <div class="player2-controls">
+          <h3>Joueur 2</h3>
+          <p>Flèches - Déplacement</p>
+          <p>L - Attaque</p>
+          <p>M - Attaque spéciale</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/js/fighters.js"></script>
+    <script src="src/js/animations.js"></script>
+    <script src="src/js/controls.js"></script>
+    <script src="src/js/game.js"></script>
+  </body>
+</html>

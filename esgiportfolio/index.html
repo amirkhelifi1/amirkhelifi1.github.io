@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amir Khelifi - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2a2a72;
+        --primary-rgb: 42, 42, 114;
+        --secondary: #009ffd;
+        --secondary-rgb: 0, 159, 253;
+        --accent: #ff2e63;
+        --accent-rgb: 255, 46, 99;
+        --text: #333;
+        --bg: #fafafa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui, sans-serif;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+
+      /* Navbar */
+      .navbar-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        z-index: 1000;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        width: 90%;
+        max-width: 1200px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary);
+        text-decoration: none;
+        position: relative;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .logo:hover::after {
+        width: 100%;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+      }
+
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      .hero-content {
+        text-align: center;
+        color: white;
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        padding: 2rem;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease forwards 0.2s;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease forwards 0.4s;
+      }
+
+      .btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn i {
+        font-size: 1.2rem;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 4px 15px rgba(255, 46, 99, 0.3);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Timeline Modal */
+      .timeline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(250, 250, 250, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s ease;
+        overflow-y: auto;
+        padding: 6rem 2rem 2rem;
+      }
+
+      .timeline.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .timeline-close {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        z-index: 2001;
+      }
+
+      .timeline-close:hover {
+        transform: rotate(90deg);
+      }
+
+      /* Alternance Alert */
+      .alternance-alert {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        color: white;
+        text-align: center;
+        animation: fadeInUp 0.8s ease forwards;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .alert-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .alternance-alert h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .alternance-alert p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      .alternance-alert .btn {
+        display: inline-flex;
+        margin-top: 1rem;
+      }
+
+      /* Timeline Items */
+      .timeline-container {
+        position: relative;
+        padding: 2rem 0;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .timeline-container::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        background: var(--secondary);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        width: calc(50% - 3rem);
+        margin: 2rem 0;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: slideIn 0.6s ease forwards paused;
+      }
+
+      .timeline-item:nth-child(odd) {
+        margin-right: calc(50% + 3rem);
+      }
+
+      .timeline-item:nth-child(even) {
+        margin-left: calc(50% + 3rem);
+      }
+
+      .timeline-date {
+        color: var(--secondary);
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .timeline-item p {
+        line-height: 1.6;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-item ul {
+        list-style: none;
+        margin-top: 1rem;
+      }
+
+      .timeline-item li {
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .timeline-item li::before {
+        content: "•";
+        color: var(--secondary);
+        position: absolute;
+        left: 0;
+      }
+
+      .skills-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .skill-tag {
+        background: rgba(0, 159, 253, 0.1);
+        color: var(--secondary);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .skill-tag:hover {
+        background: var(--secondary);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .navbar {
+          width: 95%;
+          padding: 1rem;
+        }
+
+        .nav-links {
+          display: none;
+          position: fixed;
+          top: 5rem;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 90%;
+          background: white;
+          padding: 1rem;
+          border-radius: 15px;
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .hamburger {
+          display: block;
+          cursor: pointer;
+          font-size: 1.5rem;
+          color: var(--primary);
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .timeline-container::after {
+          left: 2rem;
+        }
+
+        .timeline-item {
+          width: calc(100% - 4rem);
+          margin: 2rem 0 2rem 4rem !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar-container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">Amir Khelifi</a>
+        <div class="nav-links">
+          <a href="pages/about.html" class="nav-link">À propos</a>
+          <a href="pages/skills.html" class="nav-link">Compétences</a>
+          <a href="pages/projects.html" class="nav-link">Projets</a>
+          <a href="pages/contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="hamburger">☰</div>
+      </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div id="particles-js"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Étudiant en informatique à l'ESGI</h1>
+        <p class="hero-subtitle">
+          Passionné par l'informatique, à la recherche d'une alternance
+          enrichissante
+        </p>
+        <div class="hero-buttons">
+          <button id="showTimeline" class="btn btn-primary">
+            <i class="fas fa-history"></i>
+            Découvrir mon parcours
+          </button>
+          <a href="pages/contact.html" class="btn btn-secondary">
+            <i class="fas fa-envelope"></i>
+            Me contacter
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Modal -->
+    <div class="timeline">
+      <button class="timeline-close">×</button>
+      <div class="timeline-content">
+        <!-- Alternance Alert -->
+        <div class="alternance-alert">
+          <div class="alert-icon">🎯</div>
+          <h3>En recherche active d'alternance</h3>
+          <p>
+            Pour poursuivre mon parcours à l'ESGI Paris, je suis actuellement à
+            la recherche d'une alternance enrichissante dans le développement
+            web. Une opportunité d'accueillir un étudiant passionné ?
+          </p>
+          <a href="pages/contact.html" class="btn btn-primary">
+            <i class="fas fa-envelope"></i>
+            Me contacter
+          </a>
+        </div>
+
+        <div class="timeline-container">
+          <!-- ESGI -->
+          <div class="timeline-item">
+            <div class="timeline-date">Janvier 2025</div>
+            <h3>ESGI Paris</h3>
+            <p>Formation d'Ingénieur en alternance</p>
+            <div class="skills-tags"></div>
+          </div>
+
+          <!-- École 42 -->
+          <div class="timeline-item">
+            <div class="timeline-date">Juillet 2024</div>
+            <h3>École 42, Paris</h3>
+            <p>Piscine - Formation intensive en C (4 semaines)</p>
+            <div class="skills-tags">
+              <span class="skill-tag">C</span>
+              <span class="skill-tag">Algorithmie</span>
+            </div>
+          </div>
+
+          <!-- ETNA -->
+          <div class="timeline-item">
+            <div class="timeline-date">2023-2024</div>
+            <h3>ETNA</h3>
+            <p>Année Préparatoire Accélérée en Développement (APA)</p>
+            <div class="skills-tags">
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Angular</span>
+            </div>
+          </div>
+
+          <!-- Stage Edenred -->
+          <div class="timeline-item">
+            <div class="timeline-date">Février 2023 à Mai 2023</div>
+            <h3>Stage - Edenred</h3>
+            <ul>
+              <li>
+                Formation approfondie sur Docker : création et gestion de
+                conteneurs.
+              </li>
+              <li>
+                Formation intensive sur PHP : acquisition des compétences en
+                développement dans ce langage.
+              </li>
+              <li>
+                Formation spécifique sur Linux : familiarisation avec le système
+                d'exploitation largement utilisé dans le développement et
+                l'administration système.
+              </li>
+              <li>
+                Réalisation d'un projet concret en entreprise : mise en pratique
+                des compétences acquises lors des formations.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Stage Technip FMC -->
+          <div class="timeline-item">
+            <div class="timeline-date">Février 2022 à Avril 2022</div>
+            <h3>Stage - Technip FMC</h3>
+            <ul>
+              <li>
+                Découverte du monde professionnel et de l'environnement de
+                travail en entreprise.
+              </li>
+              <li>
+                Exploration du domaine du codage et familiarisation avec les
+                pratiques et les outils.
+              </li>
+              <li>
+                Collaboration avec des professionnels expérimentés, observation
+                et apprentissage de leur expertise.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Stage IT2S -->
+          <div class="timeline-item">
+            <div class="timeline-date">Mars 2021 à Avril 2021</div>
+            <h3>Stage - IT2S</h3>
+            <ul>
+              <li>
+                Découverte des fondements du développement web (HTML et CSS) et
+                exploration du e-commerce.
+              </li>
+              <li>
+                Compétences acquises en copywriting, création graphique,
+                optimisation d'images, rédaction de pages légales, gestion de
+                campagnes publicitaires et montage vidéo.
+              </li>
+              <li>
+                Compréhension complète du e-commerce, de la conception du site à
+                la promotion, avec une mise en pratique dans un environnement
+                professionnel.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Service Civique -->
+          <div class="timeline-item">
+            <div class="timeline-date">Octobre 2021 - Mars 2021</div>
+            <h3>Service Civique - Association Tendre la main</h3>
+            <ul>
+              <li>Gestion des réseaux sociaux</li>
+              <li>Organisation des campagnes de donation</li>
+              <li>Animation et encadrement d'événements</li>
+              <li>
+                Réalisation graphique des supports de communication (flyers,
+                bannières, affiches...)
+              </li>
+            </ul>
+          </div>
+
+          <!-- Lycée La Tournelle -->
+          <div class="timeline-item">
+            <div class="timeline-date">2021-2023</div>
+            <h3>Lycée La Tournelle</h3>
+            <p>Baccalauréat Systèmes Numériques</p>
+            <div class="skills-tags">
+              <span class="skill-tag">PHP</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">C</span>
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Configuration de Particles.js
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: { enable: false },
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: { enable: false },
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+        },
+        retina_detect: true,
+      });
+
+      // Gestion du menu mobile
+      const hamburger = document.querySelector(".hamburger");
+      const navLinks = document.querySelector(".nav-links");
+
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
+      // Gestion de la timeline
+      const showTimelineBtn = document.getElementById("showTimeline");
+      const timelineModal = document.querySelector(".timeline");
+      const closeTimelineBtn = document.querySelector(".timeline-close");
+
+      function openTimeline() {
+        timelineModal.classList.add("visible");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeTimeline() {
+        timelineModal.classList.remove("visible");
+        document.body.style.overflow = "";
+      }
+
+      showTimelineBtn.addEventListener("click", openTimeline);
+      closeTimelineBtn.addEventListener("click", closeTimeline);
+
+      // Fermeture en cliquant en dehors
+      timelineModal.addEventListener("click", (e) => {
+        if (e.target === timelineModal) {
+          closeTimeline();
+        }
+      });
+
+      // Fermeture avec Échap
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && timelineModal.classList.contains("visible")) {
+          closeTimeline();
+        }
+      });
+
+      // Animation des items de la timeline
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animationPlayState = "running";
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".timeline-item").forEach((item) => {
+        observer.observe(item);
+      });
+    </script>
+  </body>
+</html>

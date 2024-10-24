@@ -1,0 +1,191 @@
+:root {
+  --primary: #2a2a72;
+  --secondary: #009ffd;
+  --accent: #ff2e63;
+  --success: #28a745;
+  --warning: #ffc107;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #f0f2f5;
+  font-family: "Segoe UI", sans-serif;
+  padding: 20px;
+}
+
+.game-container {
+  text-align: center;
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+}
+
+h1 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 15px;
+}
+
+.score-board {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+.score {
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.status {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+  height: 30px;
+  font-weight: bold;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 2rem auto;
+  max-width: 300px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: white;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cell:hover:not(.played) {
+  background: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cell.x {
+  color: var(--accent);
+}
+
+.cell.o {
+  color: var(--secondary);
+}
+
+.cell.winner {
+  animation: pulse 1s infinite;
+  background: rgba(40, 167, 69, 0.1);
+}
+
+.mode-switch {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.difficulty {
+  margin: 1rem 0;
+  display: none;
+}
+
+.difficulty.visible {
+  display: block;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cell.played {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@media (max-width: 400px) {
+  .board {
+    gap: 6px;
+  }
+
+  .cell {
+    font-size: 2rem;
+  }
+
+  .mode-switch {
+    flex-direction: column;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+}

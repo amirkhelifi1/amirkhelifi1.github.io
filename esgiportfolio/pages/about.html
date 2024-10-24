@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>À propos - Amir Khelifi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2a2a72;
+        --secondary: #009ffd;
+        --accent: #ff2e63;
+        --text: #333;
+        --bg: #fafafa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .nav-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        width: 90%;
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary);
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-link:hover {
+        color: var(--accent);
+      }
+
+      /* About Section */
+      .about-section {
+        min-height: 100vh;
+        padding: 8rem 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      .profile-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        animation: fadeIn 0.8s ease forwards;
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      .profile-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+        overflow: hidden;
+        border: 4px solid var(--accent);
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image:hover img {
+        transform: scale(1.1);
+      }
+
+      .profile-info {
+        text-align: center;
+      }
+
+      .profile-info h3 {
+        color: var(--primary);
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-info p {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text);
+        font-size: 1.1rem;
+        justify-content: center;
+      }
+
+      .profile-info i {
+        color: var(--accent);
+      }
+
+      .profile-info a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .profile-info a:hover {
+        text-decoration: underline;
+      }
+
+      .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .about-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        transform: translateY(30px);
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .about-card h3 {
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .about-card h3 i {
+        color: var(--accent);
+      }
+
+      .about-card p {
+        color: var(--text);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .skill-tag {
+        background: rgba(0, 159, 253, 0.1);
+        color: var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .profile-card {
+          max-width: 400px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav-content">
+        <a href="../index.html" class="logo">Amir Khelifi</a>
+        <div class="nav-links">
+          <a href="about.html" class="nav-link">À propos</a>
+          <a href="skills.html" class="nav-link">Compétences</a>
+          <a href="projects.html" class="nav-link">Projets</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="profile-card">
+            <div class="profile-image">
+              <img
+                src="../src/assets/images/matete.jpg"
+                alt="Portrait de Amir Khelifi"
+                class="fade-in"
+              />
+            </div>
+            <div class="profile-info">
+              <h3>Amir Khelifi</h3>
+              <p><i class="fas fa-birthday-cake"></i> Né le 2 juin 2005</p>
+              <p><i class="fas fa-map-marker-alt"></i> La Garenne-Colombes</p>
+              <p>
+                <i class="fas fa-phone"></i>
+                <a href="tel:+33768105813">07 68 10 58 13</a>
+              </p>
+              <p>
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:amirkhelifipro@gmail.com"
+                  >amirkhelifipro@gmail.com</a
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="about-content">
+            <div class="about-card" style="animation-delay: 0.2s">
+              <h3><i class="fas fa-user"></i> Qui suis-je ?</h3>
+              <p>
+                Je suis un passionné d'informatique . Mon intérêt s'est
+                développé lors de ma formation en systèmes numériques avec des
+                partenaires comme IBM et Orange. J'ai découvert ma passion pour
+                l'informatique lors de mon stage chez Edenred. En dehors du
+                développement, j'adore le sport et voyager. Actuellement, je
+                recherche une alternance pour poursuivre mes études à l'ESGI.
+              </p>
+            </div>
+
+            <div class="about-card" style="animation-delay: 0.8s">
+              <h3><i class="fas fa-star"></i> Mes Points Forts</h3>
+              <div class="skill-tags">
+                <span class="skill-tag">À l'écoute</span>
+                <span class="skill-tag">Ponctuel</span>
+                <span class="skill-tag">Désir d'apprendre</span>
+                <span class="skill-tag">Soucieux du détail</span>
+                <span class="skill-tag">Esprit d'équipe</span>
+                <span class="skill-tag">Adaptabilité</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      // Animation au scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+        }
+      );
+
+      // Observer pour les cartes et la carte de profil
+      document
+        .querySelectorAll(".about-card, .profile-card")
+        .forEach((card) => {
+          observer.observe(card);
+        });
+
+      // Animation de chargement de l'image de profil
+      const profileImage = document.querySelector(".profile-image img");
+      profileImage.onload = () => {
+        profileImage.classList.add("fade-in");
+      };
+
+      // Ajouter une animation de survol sur les cartes
+      const cards = document.querySelectorAll(".about-card, .profile-card");
+      cards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          card.style.transform = "scale(1.05)";
+          card.style.boxShadow = "0 12px 40px rgba(0, 0, 0, 0.2)";
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "scale(1)";
+          card.style.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.1)";
+        });
+      });
+    </script>
+  </body>
+</html>

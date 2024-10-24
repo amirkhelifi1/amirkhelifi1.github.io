@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compétences - Amir Khelifi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2a2a72;
+        --primary-rgb: 42, 42, 114;
+        --secondary: #009ffd;
+        --secondary-rgb: 0, 159, 253;
+        --accent: #ff2e63;
+        --accent-rgb: 255, 46, 99;
+        --text: #333;
+        --bg: #fafafa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+
+      #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* Navbar modifiée */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .nav-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        width: 90%;
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary);
+        text-decoration: none;
+        position: relative;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .logo:hover::after {
+        width: 100%;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-link:hover {
+        color: var(--accent);
+      }
+
+      /* Skills Section */
+      .skills-section {
+        min-height: 100vh;
+        padding: 8rem 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 3rem;
+        margin-bottom: 4rem;
+        text-align: center;
+        color: white;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: white;
+        transform: scaleX(0);
+        transform-origin: right;
+        animation: titleLine 0.8s ease forwards 0.8s;
+      }
+
+      @keyframes titleLine {
+        to {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+      }
+
+      .skills-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .skill-category {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-category::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--accent);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.3s ease;
+      }
+
+      .skill-category:hover::before {
+        transform: scaleY(1);
+        transform-origin: top;
+      }
+
+      .skill-category:hover {
+        transform: translateY(-5px) translateX(2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .category-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .category-title i {
+        font-size: 1.8rem;
+        color: var(--accent);
+        transition: transform 0.3s ease;
+      }
+
+      .skill-category:hover .category-title i {
+        transform: scale(1.1);
+      }
+
+      .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .skill-item {
+        background: rgba(0, 159, 253, 0.1);
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        color: var(--text);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 159, 253, 0.2);
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-item::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120%;
+        height: 120%;
+        background: var(--accent);
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 50%;
+        transition: transform 0.4s ease;
+        z-index: -1;
+      }
+
+      .skill-item:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .skill-item:hover {
+        color: white;
+        border-color: transparent;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 46, 99, 0.3);
+      }
+
+      .social-links {
+        position: fixed;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        z-index: 90;
+      }
+
+      .social-link {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-link::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120%;
+        height: 120%;
+        background: var(--accent);
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 50%;
+        transition: transform 0.4s ease;
+        z-index: -1;
+      }
+
+      .social-link:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .social-link:hover {
+        color: white;
+        transform: translateX(-5px);
+      }
+
+      .social-link i {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .social-link:hover i {
+        transform: scale(1.1);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .nav-content {
+          width: 95%;
+          padding: 1rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .social-links {
+          display: none;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .skills-container {
+          grid-template-columns: 1fr;
+        }
+
+        .skill-category {
+          margin: 0 1rem;
+        }
+      }
+    </style>
+  </head>
+
+</html><body>
+  <div id="particles-js"></div>
+
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="../index.html" class="logo">Amir Khelifi</a>
+      <div class="nav-links">
+        <a href="about.html" class="nav-link">À propos</a>
+        <a href="skills.html" class="nav-link">Compétences</a>
+        <a href="projects.html" class="nav-link">Projets</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="social-links">
+    <a href="https://www.linkedin.com/in/amir-khelifi-20100926a/" class="social-link" target="_blank">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="#" class="social-link" target="_blank">
+      <i class="fab fa-github"></i>
+    </a>
+  </div>
+
+  <section class="skills-section">
+    <div class="container">
+      <h2 class="section-title">Mes Compétences</h2>
+      <div class="skills-container">
+        <!-- Développement Web -->
+        <div class="skill-category" style="animation-delay: 0.2s">
+          <h3 class="category-title">
+            <i class="fas fa-code"></i>
+            Développement Web
+          </h3>
+          <div class="skill-list">
+            <span class="skill-item">HTML</span>
+            <span class="skill-item">CSS</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">TypeScript</span>
+            <span class="skill-item">PHP</span>
+          </div>
+        </div>
+
+        <!-- Frameworks & Libraries -->
+        <div class="skill-category" style="animation-delay: 0.4s">
+          <h3 class="category-title">
+            <i class="fas fa-layer-group"></i>
+            Frameworks & Libraries
+          </h3>
+          <div class="skill-list">
+            <span class="skill-item">React</span>
+            <span class="skill-item">Next.js</span>
+          </div>
+        </div>
+
+        <!-- Langages de Programmation -->
+        <div class="skill-category" style="animation-delay: 0.6s">
+          <h3 class="category-title">
+            <i class="fas fa-terminal"></i>
+            Autres Langages
+          </h3>
+          <div class="skill-list">
+            <span class="skill-item">Python</span>
+            <span class="skill-item">C</span>
+            <span class="skill-item">C++</span>
+            <span class="skill-item">MySQL</span>
+          </div>
+        </div>
+
+        <!-- DevOps & Administration -->
+        <div class="skill-category" style="animation-delay: 0.8s">
+          <h3 class="category-title">
+            <i class="fas fa-server"></i>
+            DevOps & Administration
+          </h3>
+          <div class="skill-list">
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">Linux</span>
+          </div>
+        </div>
+
+        <!-- Outils de Développement -->
+        <div class="skill-category" style="animation-delay: 1s">
+          <h3 class="category-title">
+            <i class="fas fa-tools"></i>
+            Outils de Développement
+          </h3>
+          <div class="skill-list">
+            <span class="skill-item">VS Code</span>
+            <span class="skill-item">GitHub</span>
+            <span class="skill-item">GitLab</span>
+            <span class="skill-item">Postman</span>
+          </div>
+        </div>
+
+        <!-- Design & Création -->
+        <div class="skill-category" style="animation-delay: 1.2s">
+          <h3 class="category-title">
+            <i class="fas fa-palette"></i>
+            Design & Création
+          </h3>
+          <div class="skill-list">
+            <span class="skill-item">Figma</span>
+            <span class="skill-item">Canva</span>
+            <span class="skill-item">UI/UX Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Configuration Particles.js
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: "#ffffff"
+        },
+        shape: {
+          type: "circle"
+        },
+        opacity: {
+          value: 0.5,
+          random: false,
+          anim: {
+            enable: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "repulse"
+          },
+          onclick: {
+            enable: true,
+            mode: "push"
+          },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+
+    // Animation des éléments au scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "20px"
+      }
+    );
+
+    // Observer les catégories de compétences
+    document.querySelectorAll('.skill-category').forEach((category) => {
+      observer.observe(category);
+    });
+
+    // Animation au survol des compétences
+    document.querySelectorAll('.skill-item').forEach((item) => {
+      item.addEventListener('mouseover', function() {
+        this.style.transform = 'translateY(-2px)';
+      });
+      
+      item.addEventListener('mouseout', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>

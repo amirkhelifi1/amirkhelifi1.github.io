@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morpion - Amir Khelifi</title>
+    <link rel="stylesheet" href="src/styles/styles.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>Morpion Avancé</h1>
+
+      <div class="game-info">
+        <div class="score-board">
+          <div class="score">
+            <div>Joueur X</div>
+            <div id="score-x">0</div>
+          </div>
+          <div class="score">
+            <div>Joueur O</div>
+            <div id="score-o">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-switch">
+        <button class="btn btn-primary" id="pvp-mode">Joueur vs Joueur</button>
+        <button class="btn btn-secondary" id="ai-mode">Joueur vs IA</button>
+      </div>
+
+      <div class="difficulty">
+        <label>Difficulté IA:</label>
+        <select id="ai-difficulty" class="btn">
+          <option value="easy">Facile</option>
+          <option value="medium">Moyen</option>
+          <option value="hard">Difficile</option>
+        </select>
+      </div>
+
+      <div class="status"></div>
+
+      <div class="board">
+        <button class="cell" data-index="0"></button>
+        <button class="cell" data-index="1"></button>
+        <button class="cell" data-index="2"></button>
+        <button class="cell" data-index="3"></button>
+        <button class="cell" data-index="4"></button>
+        <button class="cell" data-index="5"></button>
+        <button class="cell" data-index="6"></button>
+        <button class="cell" data-index="7"></button>
+        <button class="cell" data-index="8"></button>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="restart-btn">Recommencer</button>
+        <button class="btn btn-secondary" id="reset-score">
+          Réinitialiser les scores
+        </button>
+      </div>
+    </div>
+
+    <script src="src/js/particles.js"></script>
+    <script src="src/js/nav.js"></script>
+    <script src="src/js/main.js"></script>
+  </body>
+</html>
